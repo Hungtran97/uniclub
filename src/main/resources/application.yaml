@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /uniclub
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/uniclub
+    password: '123456'
+  application:
+    name: uniclub
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 500KB
+      max-request-size: 500KB
+jwt:
+  signerKey: '+Tyz0pztuyKHVQtCl41ABz6n7JmdLNb5n5Eo1QCNJ3DRvmxQI8PJy94FxpaKfgvi'
+root:
+  path: 'C:\Users\tranh\Desktop\uploads'
