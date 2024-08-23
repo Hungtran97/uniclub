@@ -1,8 +1,10 @@
 package com.cybersoft.uniclub.controller;
 
 import com.cybersoft.uniclub.exception.FileException;
+import com.cybersoft.uniclub.request.AddProductRequest;
 import com.cybersoft.uniclub.response.BaseResponse;
 import com.cybersoft.uniclub.service.FilesStorageService;
+import com.cybersoft.uniclub.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
-    FilesStorageService storageService;
+    private ProductService productService;
     @PostMapping
-    public ResponseEntity<?> addProducts (@RequestParam("file") MultipartFile file){
+    public ResponseEntity<?> addProducts (AddProductRequest request){
         BaseResponse response = new BaseResponse();
-        try {
-            storageService.save(file);
-            response.setMessage("Uploaded the file successfully: " + file.getOriginalFilename());
-        } catch (Exception e) {
-            throw new FileException("Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage());
-
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        productService.addProduct(request);
+        return new ResponseEntity<>("Hello add product", HttpStatus.OK);
     }
 }
