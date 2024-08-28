@@ -19,7 +19,7 @@ public class ProductEntity {
     @Column(name = "description")
     private String desc;
 
-    @Column(name = "infomation")
+    @Column(name = "information")
     private String info;
 
     @Column(name = "price")
@@ -31,14 +31,6 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "id_brand")
     private  BrandEntity brand;
-
-    @ManyToOne
-    @JoinColumn(name = "id_color")
-    private  ColorEntity color;
-
-    @ManyToOne
-    @JoinColumn(name = "id_size")
-    private  SizeEntity size;
 
     @OneToMany(mappedBy = "product")
     private List<VariantEntity> variants;

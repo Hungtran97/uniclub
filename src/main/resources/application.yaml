@@ -14,8 +14,8 @@ spring:
     show-sql: true
   servlet:
     multipart:
-      max-file-size: 500KB
-      max-request-size: 500KB
+      max-file-size: 20MB
+      max-request-size: 20MB
 jwt:
   signerKey: '+Tyz0pztuyKHVQtCl41ABz6n7JmdLNb5n5Eo1QCNJ3DRvmxQI8PJy94FxpaKfgvi'
 root:

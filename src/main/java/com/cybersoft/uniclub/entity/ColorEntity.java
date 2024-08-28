@@ -16,5 +16,5 @@ public class ColorEntity {
     private String name;
 
     @OneToMany(mappedBy = "color")
-    private List<ProductEntity> productList;
+    private List<VariantEntity> variantList;
 }

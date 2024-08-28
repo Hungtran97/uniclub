@@ -16,5 +16,5 @@ public class SizeEntity {
     private String name;
 
     @OneToMany(mappedBy = "size")
-    private List<ProductEntity> productList;
+    private List<VariantEntity> variantList;
 }
