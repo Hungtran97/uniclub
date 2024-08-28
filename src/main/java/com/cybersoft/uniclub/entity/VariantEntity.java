@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "variant")
 @Data
 public class VariantEntity {
     @Id
@@ -24,6 +24,14 @@ public class VariantEntity {
 
     @Column(name = "create_date")
     private LocalDateTime createDate;
+
+    @ManyToOne
+    @JoinColumn(name = "id_color")
+    private  ColorEntity color;
+
+    @ManyToOne
+    @JoinColumn(name = "id_size")
+    private  SizeEntity size;
 
     @ManyToOne
     @JoinColumn(name = "id_product")

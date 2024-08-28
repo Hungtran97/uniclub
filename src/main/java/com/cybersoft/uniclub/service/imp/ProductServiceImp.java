@@ -1,5 +1,6 @@
 package com.cybersoft.uniclub.service.imp;
 
+import com.cybersoft.uniclub.dto.ProductDTO;
 import com.cybersoft.uniclub.entity.*;
 import com.cybersoft.uniclub.repository.ProductRepository;
 import com.cybersoft.uniclub.repository.VariantRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class ProductServiceImp implements ProductService {
@@ -42,17 +44,36 @@ public class ProductServiceImp implements ProductService {
         brand.setId(request.idBrand());
 
         product.setBrand(brand);
-        product.setColor(color);
-        product.setSize(size);
 
         ProductEntity productSave = productRepository.save(product);
 
         VariantEntity variant = new VariantEntity();
         variant.setProduct(productSave);
+        variant.setColor(color);
+        variant.setSize(size);
+        variant.setPrice(request.priceSize());
+        variant.setQuantity(request.quantity());
+        variant.setImage(request.file().getOriginalFilename());
 
         variantRepository.save(variant);
 
         filesStorageService.save(request.file());
 
+    }
+
+    @Override
+    public List<ProductDTO> getProducts() {
+        List<ProductEntity> products = productRepository.findAll();
+        return products.stream().map(item -> {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setName(item.getName());
+            productDTO.setPrice(item.getPrice());
+            if (item.getVariants().size() > 0) {
+            productDTO.setLinkImg("http://localhost:8080/uniclub/file/" + item.getVariants().getFirst().getImage());
+            } else {
+            productDTO.setLinkImg("");
+            }
+            return productDTO;
+        }).toList();
     }
 }
